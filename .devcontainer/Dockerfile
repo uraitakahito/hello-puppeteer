@@ -47,6 +47,28 @@ RUN apt-get update -qq && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
+# Install latest chrome dev package and fonts to support major charsets (Chinese, Japanese, Arabic, Hebrew, Thai and a few others)
+# Note: this installs the necessary libs to make the bundled version of Chromium that Puppeteer
+# installs, work.
+# https://zenn.dev/tom1111/articles/0dc7cde5c8e9bf
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      chromium \
+      fonts-ipafont-gothic \
+      fonts-wqy-zenhei \
+      fonts-thai-tlwg \
+      fonts-kacst \
+      fonts-freefont-ttf \
+      libxss1 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+
+RUN usermod -aG audio ${user_name} && \
+  usermod -aG video ${user_name}
+
 COPY bin/docker-entrypoint.sh /usr/local/bin/
 
 USER ${user_name}
