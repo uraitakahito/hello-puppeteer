@@ -1,7 +1,6 @@
 {
   "name": "hello-puppeteer",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "start": "node hello-puppeteer.js"
   },
