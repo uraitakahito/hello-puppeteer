@@ -1,5 +1,5 @@
 Type:
 
 ```console
-% npm run start
+% node examples/hello-puppeteer.js
 ```

@@ -6,8 +6,7 @@
       "request": "launch",
       "name": "Debug express server",
       "skipFiles": ["<node_internals>/**"],
-      // "program": "${workspaceFolder}/index.js"
-      "program": "${workspaceFolder}/hello-puppeteer.js"
+      "program": "${workspaceFolder}/examples/hello-puppeteer.js"
     }
   ]
 }
