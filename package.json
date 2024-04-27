@@ -1,11 +1,17 @@
 {
   "name": "hello-puppeteer",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "start": "node hello-puppeteer.js"
   },
   "dependencies": {
     "express": "*",
     "puppeteer": "*"
+  },
+  "devDependencies": {
+    "eslint": "*",
+    "eslint-config-google": "*",
+    "eslint-plugin-jsdoc": "*"
   }
 }
