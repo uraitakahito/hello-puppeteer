@@ -33,12 +33,8 @@
   // Configure tool-specific properties.
   "customizations": {
     "vscode": {
+      // Reduce dependency on devcontainer.json. So let's use 'zshrc-entrypoint-init.d/install-*-extension.sh'.
       "extensions": [
-        "dbaeumer.vscode-eslint",
-        "eamodio.gitlens",
-        "GitHub.copilot",
-        "ms-azuretools.vscode-docker",
-        "ms-vscode-remote.remote-containers"
       ]
     }
   }

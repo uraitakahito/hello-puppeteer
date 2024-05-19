@@ -71,6 +71,7 @@ RUN usermod -aG audio ${user_name} && \
   usermod -aG video ${user_name}
 
 COPY bin/docker-entrypoint.sh /usr/local/bin/
+COPY zshrc-entrypoint-init.d /etc/zshrc-entrypoint-init.d
 
 USER ${user_name}
 WORKDIR /home/${user_name}
