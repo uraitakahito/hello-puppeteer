@@ -1,4 +1,5 @@
-FROM node:21.6-bookworm
+# Debian 12.5
+FROM node:22.2.0-bookworm
 
 ARG user_id=501
 ARG group_id=20
