@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "node hello-puppeteer.js"
+    "start": "node examples/screenshot.cjs"
   },
   "dependencies": {
     "express": "*",

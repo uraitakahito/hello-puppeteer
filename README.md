@@ -1,5 +1,5 @@
 Type:
 
 ```console
-% node examples/hello-puppeteer.js
+% node examples/hello-puppeteer.cjs
 ```
