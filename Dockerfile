@@ -4,6 +4,7 @@ FROM node:22.6.0-bookworm
 ARG user_name=developer
 ARG user_id
 ARG group_id
+ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 
 RUN apt-get update -qq && \
   apt-get upgrade -y -qq && \
@@ -68,6 +69,13 @@ RUN usermod -aG audio ${user_name} && \
 
 USER ${user_name}
 WORKDIR /home/${user_name}
+
+#
+# dotfiles
+#
+RUN cd /home/${user_name} && \
+  git clone --depth 1 ${dotfiles_repository} && \
+  dotfiles/install.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
