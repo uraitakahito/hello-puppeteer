@@ -10,7 +10,6 @@ ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 # Install packages
 #
 RUN apt-get update -qq && \
-  apt-get upgrade -y -qq && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
     # Basic
     ca-certificates \
