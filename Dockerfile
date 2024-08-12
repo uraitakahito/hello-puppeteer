@@ -63,7 +63,6 @@ RUN apt-get update && \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
-COPY docker-entrypoint.sh /usr/local/bin/
 COPY zshrc-entrypoint-init.d /etc/zshrc-entrypoint-init.d
 
 #
