@@ -77,12 +77,18 @@ RUN cd /usr/src && \
   CONFIGUREZSHASDEFAULTSHELL=true \
     /usr/src/features/src/common-utils/install.sh
 
+##############################
+#  VNC support starts here   #
+##############################
 #
 # desktop-lite
 # installsAfter: common-utils
 # https://github.com/uraitakahito/features/blob/0e14fce20c1008c837ac6b31b04297bd35108f9e/src/desktop-lite/devcontainer-feature.json#L58
 #
 RUN /usr/src/features/src/desktop-lite/install.sh
+##############################
+#  VNC support ends here     #
+##############################
 
 RUN usermod -aG audio ${user_name} && \
   usermod -aG video ${user_name}
@@ -97,6 +103,9 @@ RUN cd /home/${user_name} && \
   git clone --depth 1 ${dotfiles_repository} && \
   dotfiles/install.sh
 
+##############################
+#  VNC support starts here   #
+##############################
 #
 # desktop-lite
 # https://github.com/uraitakahito/features/blob/0e14fce20c1008c837ac6b31b04297bd35108f9e/src/desktop-lite/install.sh#L296-L417
@@ -107,3 +116,6 @@ ENV NOVNC_PORT 6080
 WORKDIR /app
 ENTRYPOINT ["/usr/local/share/desktop-init.sh"]
 CMD ["tail", "-F", "/dev/null"]
+##############################
+#  VNC support ends here     #
+##############################
