@@ -77,6 +77,13 @@ RUN cd /usr/src && \
   CONFIGUREZSHASDEFAULTSHELL=true \
     /usr/src/features/src/common-utils/install.sh
 
+#
+# desktop-lite
+# installsAfter: common-utils
+# https://github.com/uraitakahito/features/blob/0e14fce20c1008c837ac6b31b04297bd35108f9e/src/desktop-lite/devcontainer-feature.json#L58
+#
+RUN /usr/src/features/src/desktop-lite/install.sh
+
 RUN usermod -aG audio ${user_name} && \
   usermod -aG video ${user_name}
 
@@ -90,6 +97,13 @@ RUN cd /home/${user_name} && \
   git clone --depth 1 ${dotfiles_repository} && \
   dotfiles/install.sh
 
+#
+# desktop-lite
+# https://github.com/uraitakahito/features/blob/0e14fce20c1008c837ac6b31b04297bd35108f9e/src/desktop-lite/install.sh#L296-L417
+#
+ENV USERNAME ${user_name}
+ENV VNC_PORT 5901
+ENV NOVNC_PORT 6080
 WORKDIR /app
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/local/share/desktop-init.sh"]
 CMD ["tail", "-F", "/dev/null"]
