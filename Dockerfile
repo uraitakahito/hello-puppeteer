@@ -95,17 +95,17 @@ RUN usermod -aG audio ${user_name} && \
   usermod -aG video ${user_name}
 
 #
-# Firefox
+# Firefox is version 115.14(2024/08/15)
 #
-RUN apt-get update -qq && \
-  apt-get install -y -qq --no-install-recommends \
-    firefox-esr \
-    firefox-esr-l10n-ja \
-    fonts-noto-cjk \
-    fonts-ipafont-gothic \
-    fonts-ipafont-mincho && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
+# RUN apt-get update -qq && \
+#   apt-get install -y -qq --no-install-recommends \
+#     firefox-esr \
+#     firefox-esr-l10n-ja \
+#     fonts-noto-cjk \
+#     fonts-ipafont-gothic \
+#     fonts-ipafont-mincho && \
+#   apt-get clean && \
+#   rm -rf /var/lib/apt/lists/*
 
 USER ${user_name}
 WORKDIR /home/${user_name}
