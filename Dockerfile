@@ -6,11 +6,14 @@ ARG user_id
 ARG group_id
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 
+# Avoid warnings by switching to noninteractive for the build process
+ENV DEBIAN_FRONTEND=noninteractive
+
 #
 # Install packages
 #
 RUN apt-get update -qq && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
+  apt-get install -y -qq --no-install-recommends \
     # Basic
     ca-certificates \
     git \
@@ -30,7 +33,7 @@ RUN apt-get update -qq && \
 # https://github.com/eza-community/eza/blob/main/INSTALL.md
 #
 RUN apt-get update -qq && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends \
+  apt-get install -y -qq --no-install-recommends \
     gpg \
     wget && \
   apt-get clean && \
