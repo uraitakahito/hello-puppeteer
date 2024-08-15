@@ -65,6 +65,8 @@ ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
 COPY zshrc-entrypoint-init.d /etc/zshrc-entrypoint-init.d
 
+RUN git config --system --add safe.directory /app
+
 #
 # Add user and install basic tools.
 #
