@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 
 (async () => {
   const browser = await puppeteer.launch({
-    product: 'firefox', // WebDriver BiDi is used by default.
+    browser: 'firefox', // WebDriver BiDi is used by default.
     //
     // CAUTION:
     //  BiDi needs puppeteer >= 23 and firefox >= 129
