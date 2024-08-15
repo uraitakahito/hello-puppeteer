@@ -4,9 +4,15 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug express server",
+      "name": "run selected file",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/examples/hello-puppeteer.js"
-    }
+      // program - an absolute path to the Node.js program to debug.
+      // ${file} - the currently open file.
+      "program": "${file}",
+      // "cwd": "${workspaceFolder}/examples/express",
+      "env": {
+        "DISPLAY": ":1"
+      }
+    },
   ]
 }
