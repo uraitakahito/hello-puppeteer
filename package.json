@@ -12,6 +12,7 @@
   "devDependencies": {
     "eslint": "*",
     "eslint-config-google": "*",
-    "eslint-plugin-jsdoc": "*"
+    "eslint-plugin-jsdoc": "*",
+    "vitest": "^2.0.5"
   }
 }
