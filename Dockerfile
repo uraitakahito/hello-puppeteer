@@ -66,15 +66,6 @@ RUN apt-get update && \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
-#
-# Visual Studio Code extensions
-# https://github.com/uraitakahito/dotfiles/blob/53cdb7b04f68a73c27d927fcd8a128f538056eba/zsh/myzshrc#L26-L36
-#
-RUN cd /usr/src && \
-  git clone --depth 1 https://github.com/uraitakahito/zshrc-entrypoint-init.d && \
-  mkdir /etc/zshrc-entrypoint-init.d && \
-  ln -s /usr/src/zshrc-entrypoint-init.d/install-vscode-javascript-extensions.sh /etc/zshrc-entrypoint-init.d/install-vscode-javascript-extensions.sh
-
 RUN git config --system --add safe.directory /app
 
 #
