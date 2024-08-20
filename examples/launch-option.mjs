@@ -1,4 +1,4 @@
-/* global console */
+/* global console, performance */
 // - https://github.com/puppeteer/puppeteer/issues/3120#issuecomment-415553869
 // - https://qiita.com/markey/items/ebf2b48626b6ac61ee89
 //
