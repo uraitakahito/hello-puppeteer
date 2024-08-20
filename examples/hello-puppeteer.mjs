@@ -1,4 +1,5 @@
-const puppeteer = require('puppeteer');
+/* global console */
+import puppeteer from 'puppeteer';
 
 (async () => {
   // Launch a new browser instance
