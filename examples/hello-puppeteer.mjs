@@ -14,9 +14,25 @@ import puppeteer from 'puppeteer';
   const page = await browser.newPage();
 
   // Navigate to a webpage
-  await page.goto('https://www.google.com');
+  await page.goto('https://developer.chrome.com/');
 
-  console.log(await page.title());
+  // Set screen size.
+  await page.setViewport({width: 1024, height: 768});
+
+  // Type into search box.
+  await page.locator('.devsite-search-field').fill('automate beyond recorder');
+
+  // Wait and click on first result.
+  await page.locator('.devsite-result-item-link').click();
+
+  // Locate the full title with a unique string.
+  const textSelector = await page
+    .locator('text/Customize and automate')
+    .waitHandle();
+  const fullTitle = await textSelector?.evaluate(el => el.textContent);
+
+  // Print the full title.
+  console.log('The title of this blog post is "%s".', fullTitle);
 
   // Close the browser
   await browser.close();
