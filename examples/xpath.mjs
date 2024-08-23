@@ -1,5 +1,4 @@
 /* global console */
-// https://stackoverflow.com/questions/48165646/how-can-i-get-an-element-by-xpath/78054219#78054219
 // https://qiita.com/go_sagawa/items/85f97deab7ccfdce53ea
 import puppeteer from 'puppeteer';
 
@@ -24,6 +23,8 @@ import puppeteer from 'puppeteer';
   await page.setViewport({width: 1024, height: 768});
 
   // Select all book links
+  // puppeteer: ^22.2.0
+  // https://stackoverflow.com/questions/48165646/how-can-i-get-an-element-by-xpath/78054219#78054219
   const titleXPath = "::-p-xpath(//table[contains(@class, 'ebookCatalog')]//a[@class='ebookTitle'])";
   const titleList = await page.$$(titleXPath);
 
