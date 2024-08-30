@@ -92,7 +92,6 @@ RUN usermod -aG audio ${user_name} && \
 #   rm -rf /var/lib/apt/lists/*
 
 USER ${user_name}
-WORKDIR /home/${user_name}
 
 #
 # dotfiles
