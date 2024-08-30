@@ -28,25 +28,6 @@ RUN apt-get update -qq && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-#
-# eza
-# https://github.com/eza-community/eza/blob/main/INSTALL.md
-#
-RUN apt-get update -qq && \
-  apt-get install -y -qq --no-install-recommends \
-    gpg \
-    wget && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  mkdir -p /etc/apt/keyrings && \
-  wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | gpg --dearmor -o /etc/apt/keyrings/gierens.gpg && \
-  echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | tee /etc/apt/sources.list.d/gierens.list && \
-  chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list && \
-  apt update && \
-  apt install -y eza && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
-
 # Install latest chrome dev package and fonts to support major charsets (Chinese, Japanese, Arabic, Hebrew, Thai and a few others)
 # Note: this installs the necessary libs to make the bundled version of Chromium that Puppeteer
 # installs, work.
