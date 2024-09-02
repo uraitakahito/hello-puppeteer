@@ -10,7 +10,7 @@ import puppeteer from 'puppeteer';
     // `headless: false` enables "headful" mode.
     headless: false,
     // The slowMo option slows down Puppeteer operations by a specified amount of milliseconds.
-    // slowMo: 100,
+    slowMo: 100,
   });
 
   // Open a new page
