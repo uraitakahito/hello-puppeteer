@@ -9,6 +9,8 @@ import puppeteer from 'puppeteer';
     // `headless: 'new'` enables new Headless;
     // `headless: false` enables "headful" mode.
     headless: 'new',
+    // The slowMo option slows down Puppeteer operations by a specified amount of milliseconds.
+    slowMo: 100,
   });
 
   const page = await browser.newPage();
