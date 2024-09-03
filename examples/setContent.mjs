@@ -26,7 +26,16 @@ let browser;
     // `headless: false` enables "headful" mode.
     headless: false,
     // The slowMo option slows down Puppeteer operations by a specified amount of milliseconds.
-    slowMo: 100,
+    // slowMo: 100,
+    args: [
+      // Disables GPU hardware acceleration. If software renderer
+      // is not in place, then the GPU process won't launch.
+      //
+      // AND
+      // WORKAROUND:
+      //   - https://stackoverflow.com/questions/66402124/puppeteer-blocked-at-newpage
+      "--disable-gpu"
+    ],
   });
   const page = await browser.newPage();
   await page.setContent(html);
