@@ -1,3 +1,4 @@
+/* global console */
 // https://stackoverflow.com/questions/54814323/puppeteer-how-to-download-entire-web-page-for-offline-use
 'use strict';
 
