@@ -26,5 +26,5 @@ The noVNC can be accessed at:
 Run the following commands inside the Docker containers:
 
 ```sh
-node examples/hello-puppeteer.cjs
+node examples/redirectChain.mjs
 ```
