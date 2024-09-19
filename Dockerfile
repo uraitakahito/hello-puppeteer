@@ -30,8 +30,6 @@ RUN apt-get update && \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
-RUN git config --system --add safe.directory /app
-
 #
 # Add user and install common utils.
 #
