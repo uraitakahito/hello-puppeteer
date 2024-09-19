@@ -9,7 +9,6 @@
       // program - an absolute path to the Node.js program to debug.
       // ${file} - the currently open file.
       "program": "${file}",
-      // "cwd": "${workspaceFolder}/examples/express",
       "env": {
         "DISPLAY": ":1"
       }

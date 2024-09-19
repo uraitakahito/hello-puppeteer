@@ -19,18 +19,13 @@ docker container run \
   $PROJECT-image /bin/zsh
 ```
 
-Run the following commands inside the Docker containers:
-
-```sh
-/usr/local/share/desktop-init.sh
-```
-
 The noVNC can be accessed at:
 
 - http://localhost:6080/
 
-Test puppeteer:
+Run the following commands inside the Docker containers:
 
 ```sh
-node examples/hello-puppeteer.cjs
+node examples/redirectChain.mjs
+npx vitest run
 ```
