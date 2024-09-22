@@ -1,5 +1,5 @@
 # Debian 12
-FROM node:22.9.0-bookworm
+FROM debian:bookworm-20240904
 
 ARG user_name=developer
 ARG user_id
@@ -7,9 +7,56 @@ ARG group_id
 ARG dotfiles_repository="https://github.com/uraitakahito/dotfiles.git"
 ARG features_repository="https://github.com/uraitakahito/features.git"
 ARG extra_utils_repository="https://github.com/uraitakahito/extra-utils.git"
+ARG node_version="22.9.0"
 
 # Avoid warnings by switching to noninteractive for the build process
 ENV DEBIAN_FRONTEND=noninteractive
+
+#
+# Git
+#
+RUN apt-get update -qq && \
+  apt-get install -y -qq --no-install-recommends \
+    ca-certificates \
+    git && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
+#
+# clone features
+#
+RUN cd /usr/src && \
+  git clone --depth 1 ${features_repository}
+
+#
+# Add user and install common utils.
+#
+RUN USERNAME=${user_name} \
+    USERUID=${user_id} \
+    USERGID=${group_id} \
+    CONFIGUREZSHASDEFAULTSHELL=true \
+    UPGRADEPACKAGES=false \
+      /usr/src/features/src/common-utils/install.sh
+
+#
+# Install extra utils.
+#
+RUN cd /usr/src && \
+  git clone --depth 1 ${extra_utils_repository} && \
+  ADDEZA=true \
+  UPGRADEPACKAGES=false \
+    /usr/src/extra-utils/install.sh
+
+#
+# Install Node
+#   https://github.com/uraitakahito/features/blob/develop/src/node/install.sh
+#
+RUN INSTALLYARNUSINGAPT=false \
+    NVMVERSION="latest" \
+    PNPM_VERSION="none" \
+    USERNAME=${user_name} \
+    VERSION=${node_version} \
+      /usr/src/features/src/node/install.sh
 
 # Install latest chrome dev package and fonts to support major charsets (Chinese, Japanese, Arabic, Hebrew, Thai and a few others)
 # Note: this installs the necessary libs to make the bundled version of Chromium that Puppeteer
@@ -29,27 +76,6 @@ RUN apt-get update && \
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
-
-#
-# Add user and install common utils.
-#
-RUN cd /usr/src && \
-  git clone --depth 1 ${features_repository} && \
-  USERNAME=${user_name} \
-  USERUID=${user_id} \
-  USERGID=${group_id} \
-  CONFIGUREZSHASDEFAULTSHELL=true \
-  UPGRADEPACKAGES=false \
-    /usr/src/features/src/common-utils/install.sh
-
-#
-# Install extra utils.
-#
-RUN cd /usr/src && \
-  git clone --depth 1 ${extra_utils_repository} && \
-  ADDEZA=true \
-  UPGRADEPACKAGES=false \
-    /usr/src/extra-utils/install.sh
 
 ##############################
 #  VNC support starts here   #
