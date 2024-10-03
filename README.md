@@ -29,3 +29,9 @@ Run the following commands inside the Docker containers:
 node examples/redirectChain.mjs
 npx vitest run
 ```
+
+You can check if you have enough memory by running this command:
+
+```console
+% numfmt --to iec $(echo $(($(getconf _PHYS_PAGES) * $(getconf PAGE_SIZE))))
+```
