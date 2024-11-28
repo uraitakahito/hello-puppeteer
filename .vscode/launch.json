@@ -11,23 +11,19 @@
       "program": "${file}",
       "env": {
         "DISPLAY": ":1"
-      }
+      },
+      // break immediately when the program launches
+      "stopOnEntry": true
     },
     {
       "type": "node",
       "request": "launch",
       "name": "Debug current Vitest file",
       "autoAttachChildProcesses": true,
-      "skipFiles": [
-        "<node_internals>/**",
-        "**/node_modules/**"
-      ],
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
       // program - an absolute path to the Node.js program to debug.
       "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
-      "args": [
-        "run",
-        "${relativeFile}"
-      ],
+      "args": ["run", "${relativeFile}"],
       "smartStep": true,
       // what kind of console to use, for example, internalConsole, integratedTerminal, or externalTerminal
       "console": "integratedTerminal",
@@ -36,6 +32,6 @@
       "env": {
         "DISPLAY": ":1"
       }
-    },
+    }
   ]
 }

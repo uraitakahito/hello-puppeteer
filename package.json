@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "node examples/screenshot.cjs"
+    "start": "node examples/screenshot.cjs",
+    "test": "vitest run"
   },
   "dependencies": {
     "puppeteer": "*"
@@ -12,6 +13,7 @@
     "eslint": "*",
     "eslint-config-google": "*",
     "eslint-plugin-jsdoc": "*",
-    "vitest": "^2.0.5"
+    "npm-check-updates": "^17.1.11",
+    "vitest": "^2.1.6"
   }
 }
