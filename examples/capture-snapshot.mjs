@@ -1,6 +1,4 @@
-/* global console */
 // https://stackoverflow.com/questions/54814323/puppeteer-how-to-download-entire-web-page-for-offline-use
-'use strict';
 
 import puppeteer from 'puppeteer';
 import fs from 'fs';
@@ -20,4 +18,4 @@ import fs from 'fs';
   } catch (err) {
     console.error(err);
   }
-})();
+}());

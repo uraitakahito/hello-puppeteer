@@ -1,9 +1,9 @@
-import puppeteer from 'puppeteer'
+import puppeteer from 'puppeteer';
 
-export const getTitle = async function(url, headless ='new') {
+const getTitle = async (url, headless = 'new') => {
   // Launch a new browser instance
   const browser = await puppeteer.launch({
-    headless: headless,
+    headless,
   });
 
   // Open a new page
@@ -18,7 +18,9 @@ export const getTitle = async function(url, headless ='new') {
   await browser.close();
 
   return title;
-}
+};
+
+export default getTitle;
 
 // getTitle('https://www.google.com').then((title) => {
 //   console.log(title);
