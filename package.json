@@ -13,6 +13,7 @@
     "eslint": "*",
     "eslint-config-google": "*",
     "eslint-plugin-jsdoc": "*",
+    "npm-check-updates": "^17.1.11",
     "vitest": "^2.0.5"
   }
 }
