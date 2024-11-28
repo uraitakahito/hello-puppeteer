@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "node examples/screenshot.cjs"
+    "start": "node examples/screenshot.cjs",
+    "test": "vitest run"
   },
   "dependencies": {
     "puppeteer": "*"

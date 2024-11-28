@@ -27,7 +27,6 @@ Run the following commands inside the Docker containers:
 
 ```sh
 node examples/redirectChain.mjs
-npx vitest run
 ```
 
 You can check if you have enough memory by running this command:
