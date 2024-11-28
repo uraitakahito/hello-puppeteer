@@ -11,7 +11,9 @@
       "program": "${file}",
       "env": {
         "DISPLAY": ":1"
-      }
+      },
+      // break immediately when the program launches
+      "stopOnEntry": true
     },
     {
       "type": "node",
