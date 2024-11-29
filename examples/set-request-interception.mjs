@@ -1,4 +1,3 @@
-/* global console */
 // https://github.com/puppeteer/puppeteer/blob/v1.11.0/docs/api.md#pagesetrequestinterceptionvalue
 import puppeteer from 'puppeteer';
 
@@ -18,14 +17,14 @@ import puppeteer from 'puppeteer';
       // AND
       // WORKAROUND:
       //   - https://stackoverflow.com/questions/66402124/puppeteer-blocked-at-newpage
-      "--disable-gpu"
+      '--disable-gpu',
     ],
   });
 
   const page = await browser.newPage();
 
   await page.setRequestInterception(true);
-  page.on('request', interceptedRequest => {
+  page.on('request', (interceptedRequest) => {
     if (interceptedRequest.url().endsWith('.png') || interceptedRequest.url().endsWith('.jpg')) {
       console.log(interceptedRequest.url());
       interceptedRequest.abort();
