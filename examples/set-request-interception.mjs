@@ -1,14 +1,27 @@
-/* global console */
 // https://github.com/puppeteer/puppeteer/blob/v1.11.0/docs/api.md#pagesetrequestinterceptionvalue
 import puppeteer from 'puppeteer';
 
 (async () => {
   // Launch a new browser instance
   const browser = await puppeteer.launch({
-    // `headless: true` (default) enables old Headless;
-    // `headless: 'new'` enables new Headless;
-    // `headless: false` enables "headful" mode.
-    headless: 'new',
+    /**
+     * Whether to run the browser in headless mode.
+     *
+     * @remarks
+     *
+     * - `true` launches the browser in the
+     *   {@link https://developer.chrome.com/articles/new-headless/ | new headless}
+     *   mode.
+     *
+     * - `'shell'` launches
+     *   {@link https://developer.chrome.com/blog/chrome-headless-shell | shell}
+     *   known as the old headless mode.
+     *
+     * @defaultValue `true`
+     *
+     * https://github.com/puppeteer/puppeteer/blob/5dbc9374d6622d4fbd72f2c3a2e6445f18465133/packages/puppeteer-core/src/node/LaunchOptions.ts#L99-L114
+     */
+    headless: true,
     // The slowMo option slows down Puppeteer operations by a specified amount of milliseconds.
     // slowMo: 100,
     args: [
@@ -18,14 +31,14 @@ import puppeteer from 'puppeteer';
       // AND
       // WORKAROUND:
       //   - https://stackoverflow.com/questions/66402124/puppeteer-blocked-at-newpage
-      "--disable-gpu"
+      '--disable-gpu',
     ],
   });
 
   const page = await browser.newPage();
 
   await page.setRequestInterception(true);
-  page.on('request', interceptedRequest => {
+  page.on('request', (interceptedRequest) => {
     if (interceptedRequest.url().endsWith('.png') || interceptedRequest.url().endsWith('.jpg')) {
       console.log(interceptedRequest.url());
       interceptedRequest.abort();
