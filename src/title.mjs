@@ -21,7 +21,3 @@ const getTitle = async (url, headless = true) => {
 };
 
 export default getTitle;
-
-// getTitle('https://www.google.com').then((title) => {
-//   console.log(title);
-// });
