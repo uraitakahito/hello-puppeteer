@@ -1,4 +1,3 @@
-/* global console */
 // https://github.com/puppeteer/puppeteer/issues/2163#issuecomment-380279128
 import puppeteer from 'puppeteer';
 
@@ -18,7 +17,7 @@ import puppeteer from 'puppeteer';
       // AND
       // WORKAROUND:
       //   - https://stackoverflow.com/questions/66402124/puppeteer-blocked-at-newpage
-      "--disable-gpu"
+      '--disable-gpu',
     ],
   });
 
@@ -26,7 +25,7 @@ import puppeteer from 'puppeteer';
   const page = await browser.newPage();
 
   // Navigate to a webpage
-  let response = await page.goto('https://httpbin.org/redirect/3');
+  const response = await page.goto('https://httpbin.org/redirect/3');
   const chain = response.request().redirectChain();
   console.log(chain[0].url()); // https://httpbin.org/redirect/3
   console.log(chain[1].url()); // https://httpbin.org/relative-redirect/2
