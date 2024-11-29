@@ -15,7 +15,7 @@ import puppeteer from 'puppeteer';
       // AND
       // WORKAROUND:
       //   - https://stackoverflow.com/questions/66402124/puppeteer-blocked-at-newpage
-      "--disable-gpu"
+      '--disable-gpu',
     ],
   });
   const page = await browser.newPage();

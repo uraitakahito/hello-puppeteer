@@ -1,4 +1,3 @@
-/* global console */
 // https://qiita.com/go_sagawa/items/85f97deab7ccfdce53ea
 import puppeteer from 'puppeteer';
 
@@ -18,7 +17,7 @@ import puppeteer from 'puppeteer';
       // AND
       // WORKAROUND:
       //   - https://stackoverflow.com/questions/66402124/puppeteer-blocked-at-newpage
-      "--disable-gpu"
+      '--disable-gpu',
     ],
   });
 
@@ -29,7 +28,7 @@ import puppeteer from 'puppeteer';
   await page.goto('https://www.oreilly.co.jp/ebook/');
 
   // Set screen size.
-  await page.setViewport({width: 1024, height: 768});
+  await page.setViewport({ width: 1024, height: 768 });
 
   // Select all book links
   // puppeteer: ^22.2.0
@@ -39,7 +38,7 @@ import puppeteer from 'puppeteer';
 
   // Loop through each book
   for (const title of titleList) {
-    console.log(await title.evaluate(el => el.textContent));
+    console.log(await title.evaluate((el) => el.textContent));
   }
 
   // Close the browser
