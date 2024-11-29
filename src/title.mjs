@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 
-const getTitle = async (url, headless = 'new') => {
+const getTitle = async (url, headless = true) => {
   // Launch a new browser instance
   const browser = await puppeteer.launch({
     headless,
