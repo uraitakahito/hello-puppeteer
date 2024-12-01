@@ -74,6 +74,8 @@ module.exports = {
     'no-inline-comments': 'off',
     // https://eslint.org/docs/v8.x/rules/no-ternary
     'no-ternary': 'off',
+    // https://eslint.org/docs/latest/rules/no-underscore-dangle
+    'no-underscore-dangle': ['error', { allow: ['__dirname'] }],
     // https://eslint.org/docs/v8.x/rules/one-var
     'one-var': 'off',
   },
