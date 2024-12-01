@@ -53,6 +53,8 @@ module.exports = {
   parserOptions: {
     // https://eslint.org/docs/v8.x/use/configure/language-options#specifying-parser-options
     sourceType: 'module',
+    // https://eslint.org/docs/v8.x/use/configure/language-options#specifying-parser-options
+    ecmaVersion: 2024,
   },
 
   rules: {
@@ -72,6 +74,8 @@ module.exports = {
     'no-inline-comments': 'off',
     // https://eslint.org/docs/v8.x/rules/no-ternary
     'no-ternary': 'off',
+    // https://eslint.org/docs/latest/rules/no-underscore-dangle
+    'no-underscore-dangle': ['error', { allow: ['__dirname'] }],
     // https://eslint.org/docs/v8.x/rules/one-var
     'one-var': 'off',
   },
