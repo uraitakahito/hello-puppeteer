@@ -1,4 +1,5 @@
-/* global console, performance */
+/* eslint-disable max-len */
+/* global */
 // - https://github.com/puppeteer/puppeteer/issues/3120#issuecomment-415553869
 // - https://qiita.com/markey/items/ebf2b48626b6ac61ee89
 //
@@ -8,20 +9,20 @@ import puppeteer from 'puppeteer';
 
 const limit = 5;
 
-var timer = function(name) {
-  var start = performance.now();
+const timer = (name) => {
+  const start = performance.now();
   return {
-    stop: function() {
-      var end  = performance.now();
-      var time = end - start;
+    stop() {
+      const end = performance.now();
+      const time = end - start;
       console.log('Timer:', name, 'finished in', time, 'ms');
-    }
-  }
+    },
+  };
 };
 
-var t2 = timer('improved options');
+const t2 = timer('improved options');
 
-for (let i = 0; i < limit; i++) {
+for (let i = 0; i < limit; i += 1) {
   (async () => {
     const browser = await puppeteer.launch({
       headless: 'new',
@@ -29,7 +30,7 @@ for (let i = 0; i < limit; i++) {
         // Disables GPU hardware acceleration. If software renderer
         // is not in place, then the GPU process won't launch.
         '--disable-gpu',
-        // 	The /dev/shm partition is too small in certain VM environments,
+        // The /dev/shm partition is too small in certain VM environments,
         // causing Chrome to fail or crash (see http://crbug.com/715363).
         // Use this flag to work-around this issue (a temporary directory will
         // always be used to create anonymous shared memory files).
@@ -56,8 +57,8 @@ for (let i = 0; i < limit; i++) {
         // Note that --no-sandbox should also be used together with this flag because the sandbox needs the zygote to work. ↪
         '--no-zygote',
         // Runs the renderer and plugins in the same process as the browser
-        '--single-process'
-      ]
+        '--single-process',
+      ],
     });
     await browser.close();
   })();

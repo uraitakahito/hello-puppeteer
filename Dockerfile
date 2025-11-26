@@ -1,5 +1,5 @@
-# Debian 12.8
-FROM debian:bookworm-20241111
+# Debian 12.9
+FROM debian:bookworm-20250203
 
 ARG user_name=developer
 ARG user_id
@@ -45,7 +45,7 @@ RUN cd /usr/src && \
   git clone --depth 1 ${extra_utils_repository} && \
   ADDEZA=true \
   UPGRADEPACKAGES=false \
-    /usr/src/extra-utils/install.sh
+    /usr/src/extra-utils/utils/install.sh
 
 #
 # Install Node
