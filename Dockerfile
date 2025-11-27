@@ -133,6 +133,7 @@ RUN INSTALLYARNUSINGAPT=false \
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       chromium \
+      chromium-sandbox \
       fonts-ipafont-gothic \
       fonts-wqy-zenhei \
       fonts-thai-tlwg \
