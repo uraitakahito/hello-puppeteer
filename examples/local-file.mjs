@@ -5,7 +5,13 @@ import puppeteer from 'puppeteer';
 const __dirname = import.meta.dirname;
 
 (async () => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: [
+      '--disable-gpu',
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+    ],
+  });
   const page = await browser.newPage();
   console.log(__dirname);
   const htmlPath = path.join(__dirname, 'local-file.html');

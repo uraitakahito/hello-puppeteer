@@ -1,4 +1,3 @@
-/* global console */
 // https://stackoverflow.com/questions/48165646/how-can-i-get-an-element-by-xpath/78054219#78054219
 import puppeteer from 'puppeteer'; // ^22.2.0
 
@@ -48,7 +47,12 @@ let browser;
       // AND
       // WORKAROUND:
       //   - https://stackoverflow.com/questions/66402124/puppeteer-blocked-at-newpage
-      "--disable-gpu"
+      '--disable-gpu',
+      // The sandbox requires kernel features (namespaces) that are typically
+      // unavailable in containers. See: https://pptr.dev/troubleshooting
+      '--no-sandbox',
+      // Companion flag for --no-sandbox when running as non-root.
+      '--disable-setuid-sandbox',
     ],
   });
   const page = await browser.newPage();

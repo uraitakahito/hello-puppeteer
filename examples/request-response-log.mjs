@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import puppeteer from 'puppeteer';
 
 (async () => {
@@ -18,6 +17,11 @@ import puppeteer from 'puppeteer';
       // WORKAROUND:
       //   - https://stackoverflow.com/questions/66402124/puppeteer-blocked-at-newpage
       '--disable-gpu',
+      // The sandbox requires kernel features (namespaces) that are typically
+      // unavailable in containers. See: https://pptr.dev/troubleshooting
+      '--no-sandbox',
+      // Companion flag for --no-sandbox when running as non-root.
+      '--disable-setuid-sandbox',
     ],
   });
 
