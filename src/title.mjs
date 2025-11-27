@@ -4,6 +4,11 @@ const getTitle = async (url, headless = true) => {
   // Launch a new browser instance
   const browser = await puppeteer.launch({
     headless,
+    args: [
+      '--disable-gpu',
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+    ],
   });
 
   // Open a new page

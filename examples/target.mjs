@@ -5,9 +5,14 @@ import puppeteer from 'puppeteer';
 const __dirname = import.meta.dirname;
 
 (async () => {
-  const browser = await puppeteer.launch(
-    { headless: false },
-  );
+  const browser = await puppeteer.launch({
+    headless: false,
+    args: [
+      '--disable-gpu',
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+    ],
+  });
   const page = await browser.newPage();
   const htmlPath = path.join(__dirname, 'target-0.html');
   const content = fs.readFileSync(htmlPath, 'utf8');

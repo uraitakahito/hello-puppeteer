@@ -27,6 +27,11 @@ const puppeteer = require('puppeteer');
      * https://github.com/puppeteer/puppeteer/blob/5dbc9374d6622d4fbd72f2c3a2e6445f18465133/packages/puppeteer-core/src/node/LaunchOptions.ts#L99-L114
      */
     headless: false,
+    args: [
+      '--disable-gpu',
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+    ],
   });
 
   // Open a new page

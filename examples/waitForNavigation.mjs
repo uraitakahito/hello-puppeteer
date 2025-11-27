@@ -2,7 +2,13 @@ import puppeteer from 'puppeteer';
 
 (async () => {
   try {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      args: [
+        '--disable-gpu',
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+      ],
+    });
     const page = await browser.newPage();
 
     await page.goto('https://stackoverflow.com/');

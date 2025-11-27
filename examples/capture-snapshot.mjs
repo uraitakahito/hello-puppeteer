@@ -5,7 +5,13 @@ import fs from 'fs';
 
 (async function main() {
   try {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      args: [
+        '--disable-gpu',
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+      ],
+    });
     const [page] = await browser.pages();
 
     await page.goto('https://www.nikkei.com/');
