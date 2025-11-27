@@ -117,6 +117,18 @@ RUN cd /home/${user_name} && \
   git clone --depth 1 ${dotfiles_repository} && \
   dotfiles/install.sh
 
+#
+# Claude Code
+#
+# Discussion about using nvm during Docker container build:
+#   https://stackoverflow.com/questions/25899912/how-to-install-nvm-in-docker
+ARG TZ
+ENV TZ="$TZ"
+ENV NVM_DIR=/usr/local/share/nvm
+RUN bash -c "source $NVM_DIR/nvm.sh && \
+             nvm use ${node_version} && \
+             npm install -g @anthropic-ai/claude-code"
+
 ##############################
 #  VNC support starts here   #
 ##############################
