@@ -7,6 +7,7 @@ export default defineWorkspace([
     test: {
       name: 'node',
       include: ['test/**/*.test.{ts,js,mjs}'],
+      exclude: ['**/node_modules/**', '.Trash*/**'],
       environment: 'node',
       // setupFiles: ['./setup.init.js'],
     },

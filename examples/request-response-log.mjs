@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import puppeteer from 'puppeteer';
 
 (async () => {

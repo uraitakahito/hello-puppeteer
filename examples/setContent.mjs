@@ -1,4 +1,3 @@
-/* global console */
 // https://stackoverflow.com/questions/48165646/how-can-i-get-an-element-by-xpath/78054219#78054219
 import puppeteer from 'puppeteer'; // ^22.2.0
 
