@@ -1,14 +1,4 @@
-Build the image:
-
-```sh
-PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g` --build-arg TZ=Asia/Tokyo
-```
-
-And run it:
-
-```sh
-docker container run -d --rm --init -v $SSH_AUTH_SOCK:/ssh-agent -p 5901:5901 -p 6080:6080 -e NODE_ENV=development -e SSH_AUTH_SOCK=/ssh-agent --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
-```
+Please read the instructions in [Dockerfile](./Dockerfile) to start the Docker container.
 
 The noVNC can be accessed at:
 
