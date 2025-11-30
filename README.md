@@ -1,4 +1,40 @@
-Please read the instructions in [Dockerfile](./Dockerfile) to start the Docker container.
+## Setup
+
+### Launching Chromium
+
+Run Chromium in a separate container with a GUI environment.
+Refer to [this](https://github.com/uraitakahito/puppeteer-novnc-docker) repository.
+
+### Launching the development Docker container
+
+Please download the required files by following these steps:
+
+```
+curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/heads/main/Dockerfile
+curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/heads/main/docker-entrypoint.sh
+chmod 755 docker-entrypoint.sh
+```
+
+Detailed environment setup instructions are described at the beginning of the `Dockerfile`.
+
+**Important: Only the container start command differs from what’s written in the Dockerfile. Please use the following command.**
+
+```sh
+#
+# Build the Docker image:
+#
+PROJECT=$(basename `pwd`) && docker image build -t $PROJECT-image . --build-arg user_id=`id -u` --build-arg group_id=`id -g` --build-arg TZ=Asia/Tokyo
+#
+# Create a volume to persist the command history executed inside the Docker container.
+# It is stored in the volume because the dotfiles configuration redirects the shell history there.
+#   https://github.com/uraitakahito/dotfiles/blob/b80664a2735b0442ead639a9d38cdbe040b81ab0/zsh/myzshrc#L298-L305
+#
+docker volume create $PROJECT-zsh-history
+#
+# Start the Docker container:
+#
+docker container run --add-host=puppeteer:host-gateway -d --rm --init -v $SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
+```
 
 ## Running get-title example
 
