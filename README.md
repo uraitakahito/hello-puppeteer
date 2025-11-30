@@ -38,17 +38,13 @@ docker container run --add-host=puppeteer:host-gateway -d --rm --init -v $SSH_AU
 
 ## Running get-title example
 
-Connect to a remote browser and get the page title:
-
-```sh
-node examples/get-title.mjs
-```
-
 With custom host and port:
 
 ```sh
 node examples/get-title.mjs --host puppeteer --port 9222
 ```
+
+Ensure that the value passed to `--host` matches the value specified for `--add-host` in the `docker container run` command.
 
 ### Accessing Chrome DevTools Protocol
 
