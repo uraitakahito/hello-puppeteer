@@ -1,42 +1,40 @@
 Please read the instructions in [Dockerfile](./Dockerfile) to start the Docker container.
 
-## Running in headless mode
+## Running get-title example
+
+Connect to a remote browser and get the page title:
 
 ```sh
 node examples/get-title.mjs
 ```
 
-## Running in headful mode
-
-### Running after logging into noVNC
-
-The noVNC can be accessed at:
-
-- http://localhost:6080/
-
-Run the following commands inside the Docker containers:
+With custom host and port:
 
 ```sh
-node examples/get-title.mjs --no-headless --slow-mo 250
+node examples/get-title.mjs --host puppeteer --port 9222
 ```
 
-### Running from the terminal
+### Accessing Chrome DevTools Protocol
 
-Set the `DISPLAY` environment variable to use the VNC server:
+When accessing the DevTools endpoint from inside a Docker container using a hostname (e.g., `puppeteer`), you must override the `Host` header. This is required because Chrome v66+ validates the `Host` header and only accepts IP addresses or `localhost` to prevent DNS Rebinding attacks.
 
 ```sh
-DISPLAY=:1 node examples/get-title.mjs --no-headless --slow-mo 250
+# Using hostname with Host header override
+curl -H "Host: localhost" http://puppeteer:9222/json/version
+
+# Or using IP address directly
+curl http://192.168.65.254:9222/json/version
 ```
 
-You can watch the browser in action via noVNC at http://localhost:6080/
+Without the header override, you will receive an error:
 
-### Using xvfb
-
-Use `xvfb-run` to run headful mode without a display (useful for CI/CD):
-
-```sh
-xvfb-run --auto-servernum npx node examples/get-title.mjs --no-headless --slow-mo 250
 ```
+Host header is specified and is not an IP address or localhost.
+```
+
+References:
+- [Chrome remote debugging expects host header - Puppeteer Issue #2242](https://github.com/puppeteer/puppeteer/issues/2242)
+- [chrome-remote-interface Issue #340](https://github.com/cyrus-and/chrome-remote-interface/issues/340)
 
 ### Troubleshooting
 

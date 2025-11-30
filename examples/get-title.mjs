@@ -1,22 +1,23 @@
 /**
- * Googleに接続してページタイトルを取得するサンプル
+ * リモートブラウザに接続してページタイトルを取得するサンプル
  *
  * Usage:
  *   node examples/get-title.mjs [options]
  *
  * Options:
- *   --no-headless, -H    Show browser window (default: headless)
- *   --slow-mo <ms>       Slow down Puppeteer operations by specified milliseconds
+ *   --host <hostname>    Remote browser hostname (default: puppeteer)
+ *   --port <port>        Remote debugging port (default: 9222)
  *   --help, -h           Show this help message
  */
 import puppeteer from 'puppeteer';
+import dns from 'dns/promises';
 
 const showHelp = () => {
   console.log(`Usage: node examples/get-title.mjs [options]
 
 Options:
-  --no-headless, -H    Show browser window (default: headless)
-  --slow-mo <ms>       Slow down Puppeteer operations by specified milliseconds
+  --host <hostname>    Remote browser hostname (default: puppeteer)
+  --port <port>        Remote debugging port (default: 9222)
   --help, -h           Show this help message
 `);
 };
@@ -24,18 +25,25 @@ Options:
 const parseArgs = (argv) => {
   const args = argv.slice(2);
 
-  let slowMo = 0;
-  const slowMoIndex = args.indexOf('--slow-mo');
-  const slowMoValue = args[slowMoIndex + 1];
-  if (slowMoIndex !== -1 && slowMoValue !== undefined) {
-    slowMo = parseInt(slowMoValue, 10);
-  }
+  const getArgValue = (name) => {
+    const index = args.indexOf(name);
+    return index !== -1 ? args[index + 1] : undefined;
+  };
 
   return {
-    headless: !args.includes('--no-headless') && !args.includes('-H'),
-    slowMo,
+    host: getArgValue('--host') ?? 'puppeteer',
+    port: parseInt(getArgValue('--port') ?? '9222', 10),
     help: args.includes('--help') || args.includes('-h'),
   };
+};
+
+const getBrowserWSEndpoint = async (host, port) => {
+  // ホスト名をIPアドレスに解決（Chrome DevTools ProtocolはHostヘッダーにIPかlocalhostのみ許可）
+  const { address } = await dns.lookup(host);
+  const response = await fetch(`http://${address}:${port}/json/version`);
+  const data = await response.json();
+  // WebSocket URLのホスト名を実際の接続先に置換
+  return data.webSocketDebuggerUrl.replace(/^ws:\/\/[^/]*/, `ws://${address}:${port}`);
 };
 
 const getTitle = async () => {
@@ -46,22 +54,10 @@ const getTitle = async () => {
     return;
   }
 
-  if (!options.headless) {
-    console.log('(Browser window mode)');
-  }
-  if (options.slowMo > 0) {
-    console.log(`(Slow motion: ${options.slowMo}ms)`);
-  }
+  console.log(`Connecting to browser at ${options.host}:${options.port}...`);
 
-  const browser = await puppeteer.launch({
-    headless: options.headless,
-    slowMo: options.slowMo,
-    args: [
-      '--disable-gpu',
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-    ],
-  });
+  const browserWSEndpoint = await getBrowserWSEndpoint(options.host, options.port);
+  const browser = await puppeteer.connect({ browserWSEndpoint });
 
   const page = await browser.newPage();
   await page.goto('https://www.google.com');
@@ -69,7 +65,7 @@ const getTitle = async () => {
   const title = await page.title();
   console.log('Page title:', title);
 
-  await browser.close();
+  await browser.disconnect();
 };
 
 getTitle().catch(console.error);
